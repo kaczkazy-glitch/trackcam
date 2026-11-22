@@ -88,7 +88,7 @@ class Smooth5sBleController(private val context: Context) {
     fun stopScan() {
         try {
             context.getSystemService(BluetoothManager::class.java)?.adapter?.bluetoothLeScanner?.stopScan(scanCb)
-        } catch (_: Exception) { }
+        } catch (e: Exception) { }
         scanning = false
     }
 
@@ -123,7 +123,7 @@ class Smooth5sBleController(private val context: Context) {
 
     fun close() {
         stopScan()
-        try { gatt?.close() } catch (_: Exception) { }
+        try { gatt?.close() } catch (e: Exception) { }
         gatt = null
     }
 
@@ -231,6 +231,6 @@ class Smooth5sBleController(private val context: Context) {
         fun parseUuid(s: String): UUID? = try {
             val t = s.trim()
             if (t.length <= 8) UUID.fromString("%08x-0000-1000-8000-00805f9b34fb".format(t.toLong(16))) else UUID.fromString(t)
-        } catch (_: Exception) { null }
+        } catch (e: Exception) { null }
     }
 }
